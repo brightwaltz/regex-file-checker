@@ -14,12 +14,18 @@
     <section>
       <p>ファイルをアップロードしてください。<br />
         アップロードしたファイル名を正規表現でチェックします。<br />
-        <strong>例）</strong> 半角英数字とアンダースコアのみOK など
+        <strong>例）</strong> 半角英数字とアンダースコアのみOKなど
       </p>
       <div class="upload-area">
         <label for="fileInput" class="file-label">ファイルを選択</label>
         <input type="file" id="fileInput" accept="*/*" />
       </div>
+
+      <!-- ここが追加ポイント -->
+      <div id="uploadedFileName" class="uploaded-file-name">
+        （現在アップロードしているファイル名が表示されます）
+      </div>
+      <!-- 追加ポイントここまで -->
 
       <div class="regex-area">
         <label for="regexPattern" class="regex-label">正規表現パターンを入力：</label>

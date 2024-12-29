@@ -1,101 +1,107 @@
 /* 全体のリセット */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* ベースフォント・背景 */
-  body {
-    font-family: sans-serif;
-    background: #f0f8ff; /* 水色っぽい背景 */
-    color: #333;
-    padding: 20px;
-  }
-  
-  /* ヘッダー */
-  header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  header h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  
-  /* メインコンテンツ */
-  main {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  /* アップロードエリア */
-  .upload-area {
-    margin-bottom: 20px;
-  }
-  
-  .file-label {
-    display: inline-block;
-    background: #4caf50;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #fileInput {
-    display: none; /* ラベルでコントロールするため非表示 */
-  }
-  
-  /* 正規表現エリア */
-  .regex-area {
-    margin-bottom: 20px;
-  }
-  
-  .regex-label {
-    display: inline-block;
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  #regexPattern {
-    width: 300px;
-    padding: 5px;
-    font-size: 1rem;
-  }
-  
-  /* チェックボタン */
-  .check-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background: #2196f3;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  /* チェック結果表示 */
-  .result {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 5px;
-  }
-  
-  /* フッター */
-  footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #666;
-  }
-  
-  .footer-text {
-    font-size: 0.9rem;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ベースフォント・背景 */
+body {
+  font-family: sans-serif;
+  background: #f0f8ff; /* 水色っぽい背景 */
+  color: #333;
+  padding: 20px;
+}
+
+/* ヘッダー */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+/* メインコンテンツ */
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* アップロードエリア */
+.upload-area {
+  margin-bottom: 20px;
+}
+
+.file-label {
+  display: inline-block;
+  background: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#fileInput {
+  display: none; /* ラベルでコントロールするため非表示 */
+}
+
+/* アップロードしたファイル名の表示 */
+.uploaded-file-name {
+  margin: 10px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 正規表現エリア */
+.regex-area {
+  margin-bottom: 20px;
+}
+
+.regex-label {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#regexPattern {
+  width: 300px;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+/* チェックボタン */
+.check-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* チェック結果表示 */
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #666;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+}
