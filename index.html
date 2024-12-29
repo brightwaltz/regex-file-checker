@@ -15,16 +15,17 @@
       <p>
         以下の形式のファイル名でアップロードしてください。<br />
         例：<br />
-        ・<strong>データ処理1101_第5回演習1_243360003山田太郎.pdf</strong> (拡張子はURLパラメータによって変化)
+        ・<strong>データ処理1101_第5回演習1_243360003山田太郎.pdf</strong>
+        <br />
+        ※拡張子は URL パラメータ (例：?ext=docx) により変わります。
       </p>
 
       <div class="upload-area">
-        <!-- accept 属性はスクリプト側で動的に設定するため、ここでは一旦空にしておく例 -->
+        <!-- accept は script.js で動的に設定します -->
         <label for="fileInput" class="file-label">ファイルを選択</label>
         <input type="file" id="fileInput" />
       </div>
 
-      <!-- 選択したファイル名の表示領域 -->
       <div id="uploadedFileName" class="uploaded-file-name">
         （現在アップロードしているファイル名が表示されます）
       </div>
