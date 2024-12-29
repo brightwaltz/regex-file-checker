@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ファイル名チェッカー</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>ファイル名チェッカー</h1>
+  </header>
+
+  <main>
+    <section>
+      <p>ファイルをアップロードしてください。<br />
+        アップロードしたファイル名を正規表現でチェックします。<br />
+        <strong>例）</strong> 半角英数字とアンダースコアのみOK など
+      </p>
+      <div class="upload-area">
+        <label for="fileInput" class="file-label">ファイルを選択</label>
+        <input type="file" id="fileInput" accept="*/*" />
+      </div>
+
+      <div class="regex-area">
+        <label for="regexPattern" class="regex-label">正規表現パターンを入力：</label>
+        <input
+          type="text"
+          id="regexPattern"
+          placeholder="例: ^[a-zA-Z0-9_]+$"
+        />
+      </div>
+
+      <button id="checkBtn" class="check-btn">ファイル名をチェック</button>
+
+      <div id="result" class="result"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer-text">&copy; 2024 My Regex Checker</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
