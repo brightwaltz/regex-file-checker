@@ -72,10 +72,7 @@ document.getElementById("checkBtn").addEventListener("click", () => {
   } else {
     // 不適切なファイル名
     resultDiv.innerHTML = `
-      「${fileName}」は指定された形式ではありません。<br />
-      <strong>正しい例:</strong><br />
-      データ処理1101_第5回演習1_243360003山田太郎.${ext}
-    `;
+      「${fileName}」は指定された形式ではありません。`;
     resultDiv.style.background = "#ffcdd2"; // 赤
   }
 });
