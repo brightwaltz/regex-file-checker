@@ -8,7 +8,7 @@
 /* ベースフォント・背景 */
 body {
   font-family: sans-serif;
-  background: #f0f8ff; /* 水色っぽい背景 */
+  background: #f0f8ff;
   color: #333;
   padding: 20px;
 }

@@ -15,14 +15,13 @@
       <p>
         以下の形式のファイル名でアップロードしてください。<br />
         例：<br />
-        ・<strong>データ処理1101_第5回演習1_[243360003][山田太郎].pdf</strong><br />
-        ・<strong>データ処理1101_第5回演習1_[243360003][YamadaTaro].xlsx</strong>
+        ・<strong>データ処理1101_第5回演習1_243360003山田太郎.pdf</strong> (拡張子はURLパラメータによって変化)
       </p>
 
       <div class="upload-area">
-        <!-- PDF / XLSX のみ選択可能にする例 -->
+        <!-- accept 属性はスクリプト側で動的に設定するため、ここでは一旦空にしておく例 -->
         <label for="fileInput" class="file-label">ファイルを選択</label>
-        <input type="file" id="fileInput" accept=".pdf, .xlsx" />
+        <input type="file" id="fileInput" />
       </div>
 
       <!-- 選択したファイル名の表示領域 -->
@@ -30,7 +29,6 @@
         （現在アップロードしているファイル名が表示されます）
       </div>
 
-      <!-- 正規表現入力フォームを廃止し、固定パターンで検証 -->
       <button id="checkBtn" class="check-btn">ファイル名をチェック</button>
 
       <div id="result" class="result"></div>
@@ -38,7 +36,7 @@
   </main>
 
   <footer>
-    <p class="footer-text">&copy; 2024 My Regex Checker</p>
+    <p class="footer-text">&copy; 2024 Regex Checker</p>
   </footer>
 
   <script src="script.js"></script>

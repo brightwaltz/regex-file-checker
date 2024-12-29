@@ -1,23 +1,25 @@
-// 固定の正規表現パターンを定義
-// 例：データ処理1101_第5回演習1_[243360003][山田太郎].pdf
-//     データ処理1101_第5回演習1_[243360003][YamadaTaro].xlsx
-//   ^データ処理    -> "データ処理" の文字列
-//   \d+            -> 1桁以上の数字 (例: 1101)
-//   _第            -> "_第"
-//   \d+            -> 1桁以上の数字 (例: 5)
-//   回演習         -> "回演習"
-//   \d+            -> 1桁以上の数字 (例: 1)
-//   _              -> "_"
-//   \[ [0-9]{9} \] -> 9桁の数字を[]で括る (例: [243360003])
-//   \[ [ぁ-んァ-ヶ一-龠a-zA-Z]+ \] -> 氏名を[]で括る (例: [山田太郎], [TaroYamada]など)
-//   \.(pdf|xlsx)   -> 拡張子は "pdf" か "xlsx"
+// 1) URL から ext パラメータを取得
+const urlParams = new URLSearchParams(window.location.search);
+let ext = urlParams.get("ext");
+
+// 2) ext が取得できなかった場合は、デフォルトの拡張子を設定
+if (!ext) {
+  ext = "pdf"; // デフォルト拡張子を pdf とする例
+}
+
+// 3) input[type="file"] の accept 属性を動的に設定 (例: ".pdf", ".xlsx" など)
+const fileInput = document.getElementById("fileInput");
+fileInput.setAttribute("accept", `.${ext}`);
+
+// 4) 正規表現を拡張子に応じて動的に生成
+//    例) データ処理1101_第5回演習1_243360003山田太郎.pdf
+//        ^データ処理\d+_第\d+回演習\d+_[0-9]{9}[ぁ-んァ-ヶ一-龠a-zA-Z]+\.(pdf|xxx)$
 const fileNamePattern = new RegExp(
-  '^データ処理\\d+_第\\d+回演習\\d+_\\[[0-9]{9}\\]\\[[ぁ-んァ-ヶ一-龠a-zA-Z]+\\]\\.(pdf|xlsx)$'
+  '^データ処理\\d+_第\\d+回演習\\d+_[0-9]{9}[ぁ-んァ-ヶ一-龠a-zA-Z]+\\.' + ext + '$'
 );
 
 // ファイル選択時に現在のファイル名を表示
-document.getElementById("fileInput").addEventListener("change", () => {
-  const fileInput = document.getElementById("fileInput");
+fileInput.addEventListener("change", () => {
   const uploadedFileNameDiv = document.getElementById("uploadedFileName");
 
   if (fileInput.files && fileInput.files.length > 0) {
@@ -29,7 +31,6 @@ document.getElementById("fileInput").addEventListener("change", () => {
 });
 
 document.getElementById("checkBtn").addEventListener("click", () => {
-  const fileInput = document.getElementById("fileInput");
   const resultDiv = document.getElementById("result");
 
   // 結果表示の初期化
@@ -48,20 +49,14 @@ document.getElementById("checkBtn").addEventListener("click", () => {
   // パターンに合致するか判定
   if (fileNamePattern.test(fileName)) {
     // 適切なファイル名
-    resultDiv.textContent = `「${fileName}」は適切なファイル名です。`;
+    resultDiv.textContent = `「${fileName}」は適切なファイル名です (拡張子: ${ext}).`;
     resultDiv.style.background = "#c8e6c9"; // 緑っぽい背景
   } else {
     // 不適切なファイル名
-    // 主な間違い：
-    //  - 学籍番号が9桁でない
-    //  - 氏名が入っていない or 全角/英字以外の記号が入っている
-    //  - 拡張子が pdf / xlsx でない
-    //  - 指定の形式（データ処理～回演習～）に沿っていない 等
     resultDiv.innerHTML = `
       「${fileName}」は指定された形式ではありません。<br />
       <strong>正しい例:</strong><br />
-      データ処理1101_第5回演習1_[243360003][山田太郎].pdf<br />
-      データ処理1101_第5回演習1_[243360003][YamadaTaro].xlsx
+      データ処理1101_第5回演習1_243360003山田太郎.${ext}
     `;
     resultDiv.style.background = "#ffcdd2"; // 赤っぽい背景
   }
