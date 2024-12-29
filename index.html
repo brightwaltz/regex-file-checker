@@ -12,30 +12,25 @@
 
   <main>
     <section>
-      <p>ファイルをアップロードしてください。<br />
-        アップロードしたファイル名を正規表現でチェックします。<br />
-        <strong>例）</strong> 半角英数字とアンダースコアのみOKなど
+      <p>
+        以下の形式のファイル名でアップロードしてください。<br />
+        例：<br />
+        ・<strong>データ処理1101_第5回演習1_[243360003][山田太郎].pdf</strong><br />
+        ・<strong>データ処理1101_第5回演習1_[243360003][YamadaTaro].xlsx</strong>
       </p>
+
       <div class="upload-area">
+        <!-- PDF / XLSX のみ選択可能にする例 -->
         <label for="fileInput" class="file-label">ファイルを選択</label>
-        <input type="file" id="fileInput" accept="*/*" />
+        <input type="file" id="fileInput" accept=".pdf, .xlsx" />
       </div>
 
-      <!-- ここが追加ポイント -->
+      <!-- 選択したファイル名の表示領域 -->
       <div id="uploadedFileName" class="uploaded-file-name">
         （現在アップロードしているファイル名が表示されます）
       </div>
-      <!-- 追加ポイントここまで -->
 
-      <div class="regex-area">
-        <label for="regexPattern" class="regex-label">正規表現パターンを入力：</label>
-        <input
-          type="text"
-          id="regexPattern"
-          placeholder="例: ^[a-zA-Z0-9_]+$"
-        />
-      </div>
-
+      <!-- 正規表現入力フォームを廃止し、固定パターンで検証 -->
       <button id="checkBtn" class="check-btn">ファイル名をチェック</button>
 
       <div id="result" class="result"></div>

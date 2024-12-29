@@ -58,23 +58,6 @@ main {
   color: #333;
 }
 
-/* 正規表現エリア */
-.regex-area {
-  margin-bottom: 20px;
-}
-
-.regex-label {
-  display: inline-block;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
-#regexPattern {
-  width: 300px;
-  padding: 5px;
-  font-size: 1rem;
-}
-
 /* チェックボタン */
 .check-btn {
   display: inline-block;

@@ -1,3 +1,20 @@
+// 固定の正規表現パターンを定義
+// 例：データ処理1101_第5回演習1_[243360003][山田太郎].pdf
+//     データ処理1101_第5回演習1_[243360003][YamadaTaro].xlsx
+//   ^データ処理    -> "データ処理" の文字列
+//   \d+            -> 1桁以上の数字 (例: 1101)
+//   _第            -> "_第"
+//   \d+            -> 1桁以上の数字 (例: 5)
+//   回演習         -> "回演習"
+//   \d+            -> 1桁以上の数字 (例: 1)
+//   _              -> "_"
+//   \[ [0-9]{9} \] -> 9桁の数字を[]で括る (例: [243360003])
+//   \[ [ぁ-んァ-ヶ一-龠a-zA-Z]+ \] -> 氏名を[]で括る (例: [山田太郎], [TaroYamada]など)
+//   \.(pdf|xlsx)   -> 拡張子は "pdf" か "xlsx"
+const fileNamePattern = new RegExp(
+  '^データ処理\\d+_第\\d+回演習\\d+_\\[[0-9]{9}\\]\\[[ぁ-んァ-ヶ一-龠a-zA-Z]+\\]\\.(pdf|xlsx)$'
+);
+
 // ファイル選択時に現在のファイル名を表示
 document.getElementById("fileInput").addEventListener("change", () => {
   const fileInput = document.getElementById("fileInput");
@@ -14,47 +31,37 @@ document.getElementById("fileInput").addEventListener("change", () => {
 document.getElementById("checkBtn").addEventListener("click", () => {
   const fileInput = document.getElementById("fileInput");
   const resultDiv = document.getElementById("result");
-  const regexPattern = document.getElementById("regexPattern").value.trim();
+
+  // 結果表示の初期化
+  resultDiv.textContent = "";
+  resultDiv.style.background = "";
 
   // ファイルが選択されていない場合
-  if (!fileInput.files[0]) {
+  if (!fileInput.files || !fileInput.files[0]) {
     resultDiv.textContent = "ファイルが選択されていません。";
     resultDiv.style.background = "#ffcccc";
     return;
   }
 
-  // 正規表現パターンが空の場合
-  if (!regexPattern) {
-    resultDiv.textContent = "正規表現パターンを入力してください。";
-    resultDiv.style.background = "#ffcccc";
-    return;
-  }
-
-  // 選択されたファイル名を取得
   const fileName = fileInput.files[0].name;
-  let re;
-  try {
-    // 新しい RegExp オブジェクトを生成
-    re = new RegExp(regexPattern);
-  } catch (error) {
-    resultDiv.textContent = "正規表現パターンが不正です: " + error.message;
-    resultDiv.style.background = "#ffcccc";
-    return;
-  }
 
-  // ファイル名が正規表現にマッチするか判定
-  if (re.test(fileName)) {
+  // パターンに合致するか判定
+  if (fileNamePattern.test(fileName)) {
     // 適切なファイル名
     resultDiv.textContent = `「${fileName}」は適切なファイル名です。`;
     resultDiv.style.background = "#c8e6c9"; // 緑っぽい背景
   } else {
     // 不適切なファイル名
-    // ユーザーにファイル名の提案を行う(例: アンダースコアと英数字に置換)
-    const suggestion = fileName.replace(/[^a-zA-Z0-9_]/g, "_");
-
+    // 主な間違い：
+    //  - 学籍番号が9桁でない
+    //  - 氏名が入っていない or 全角/英字以外の記号が入っている
+    //  - 拡張子が pdf / xlsx でない
+    //  - 指定の形式（データ処理～回演習～）に沿っていない 等
     resultDiv.innerHTML = `
-      「${fileName}」は不適切なファイル名です。<br />
-      例：<strong>${suggestion}</strong> はどうですか？
+      「${fileName}」は指定された形式ではありません。<br />
+      <strong>正しい例:</strong><br />
+      データ処理1101_第5回演習1_[243360003][山田太郎].pdf<br />
+      データ処理1101_第5回演習1_[243360003][YamadaTaro].xlsx
     `;
     resultDiv.style.background = "#ffcdd2"; // 赤っぽい背景
   }
