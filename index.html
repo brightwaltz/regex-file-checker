@@ -15,17 +15,17 @@
       <p>
         以下の形式のファイル名でアップロードしてください。<br />
         例：<br />
-        ・<strong>データ処理1101_第5回演習1_243360003山田太郎.pdf</strong>
-        <br />
-        ※拡張子は URL パラメータ (例：?ext=docx) により変わります。
+        ・<strong>データ処理1101_第5回演習1_243360003山田太郎.pdf</strong><br />
+        (拡張子は URLパラメータ ?ext=docx, ?ext=pdf, ?ext=xlsx 等で切り替え)
       </p>
 
       <div class="upload-area">
-        <!-- accept は script.js で動的に設定します -->
+        <!-- accept属性はscript.jsで動的に設定します -->
         <label for="fileInput" class="file-label">ファイルを選択</label>
         <input type="file" id="fileInput" />
       </div>
 
+      <!-- 選択したファイル名の表示領域 -->
       <div id="uploadedFileName" class="uploaded-file-name">
         （現在アップロードしているファイル名が表示されます）
       </div>
@@ -34,12 +34,31 @@
 
       <div id="result" class="result"></div>
     </section>
-  </main>
 
-  <footer>
-    <p class="footer-text">&copy; 2024 Regex Checker</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <!-- ここから注意喚起のセクションを追加 -->
+    <section>
+      <h2>ファイル名で間違えやすい点 (注意事項)</h2>
+      <ul>
+        <li>
+          <strong>授業名や学籍番号・氏名をきちんと含めているか</strong><br />
+          例：<code>データ処理1101_第5回演習1_243360003山田太郎</code> のように必要事項を漏れなく記載しましょう。
+        </li>
+        <li>
+          <strong>拡張子を間違えていないか</strong><br />
+          例：<code>.docx</code> のところを <code>.pdf</code> にしてしまうなど。ファイル選択ダイアログでは拡張子だけでなく、最終的なファイル名の末尾を確認してください。
+        </li>
+        <li>
+          <strong>演習番号が正しいか</strong><br />
+          例：<code>第5回演習1</code> のはずが <code>第5回演習2</code> になっていないか、番号を再確認しましょう。
+        </li>
+        <li>
+          <strong>日にち・日付が必要な場合、正しい日付が入っているか</strong><br />
+          提出期限や授業日など、指定された日付と合致しているか確認してください。
+        </li>
+        <li>
+          <strong>ファイル名に不要なスペース・文字が含まれていないか</strong><br />
+          例：全角スペースや特殊文字（「/」「*」「?」など）を誤って入れていないか注意しましょう。
+        </li>
+        <li>
+          <strong>文字コードの違いで見た目が同じでも別の文字になっていないか</strong><br />
+          例：「デ」が「テ+結合濁点」になっているケースなど。アップロード時はファイル名の濁点や拗音などに注意
