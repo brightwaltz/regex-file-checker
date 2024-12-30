@@ -27,25 +27,23 @@
         （現在アップロードしているファイル名が表示されます）
       </div>
 
-      <!-- 正規表現の入力欄 -->
+      <!-- 正規表現の入力欄 + 追加ボタン -->
       <div class="regex-input-area">
         <label for="regexPattern">正規表現を入力：</label>
         <input
           type="text"
           id="regexPattern"
           placeholder="正規表現をここに入力"
-          size="60"
+          size="50"
         />
+        <button id="addRegexBtn" class="add-regex-btn">追加</button>
       </div>
 
       <!-- プリセットの正規表現選択ボックス -->
       <div class="regex-select-area">
         <label for="regexSelect">プリセットの正規表現：</label>
         <select id="regexSelect">
-          <!-- デフォルト: 授業名 + _第n回演習n_ + 9桁数字 + 氏名 + .ext -->
-          <option value="^[ぁ-んァ-ヶ一-龠a-zA-Z0-9_-]+_第\\d+回演習\\d+_[0-9]{9}[ぁ-んァ-ヶ一-龠a-zA-Z]+\\." selected>
-            ^[ぁ-んァ-ヶ一-龠a-zA-Z0-9_-]+_第\d+回演習\d+_[0-9]{9}[ぁ-んァ-ヶ一-龠a-zA-Z]+\.
-          </option>
+          <!-- スクリプト側で localStorage から読み込み＆生成 -->
         </select>
       </div>
 
@@ -53,6 +51,46 @@
 
       <div id="result" class="result"></div>
     </section>
+
+    <!-- ここから注意喚起のセクションを復元 -->
+    <section>
+      <h2>ファイル名で間違えやすい点 (注意事項)</h2>
+      <ul>
+        <li>
+          <strong>授業名や学籍番号・氏名をきちんと含めているか</strong><br />
+          例：<code>データ処理1101_第5回演習1_123456789山田太郎</code> のように必要事項を漏れなく記載しましょう。
+        </li>
+        <li>
+          <strong>拡張子を間違えていないか</strong><br />
+          例：<code>.docx</code> のところを <code>.pdf</code> にしてしまうなど。ファイル選択ダイアログでは拡張子だけでなく、最終的なファイル名の末尾を確認してください。
+        </li>
+        <li>
+          <strong>演習番号が正しいか</strong><br />
+          例：<code>第5回演習1</code> のはずが <code>第5回演習2</code> になっていないか、番号を再確認しましょう。
+        </li>
+        <li>
+          <strong>日にち・日付が必要な場合、正しい日付が入っているか</strong><br />
+          提出期限や授業日など、指定された日付と合致しているか確認してください。
+        </li>
+        <li>
+          <strong>ファイル名に不要なスペース・文字が含まれていないか</strong><br />
+          例：全角スペースや特殊文字（「/」「*」「?」など）を誤って入れていないか注意しましょう。
+        </li>
+        <li>
+          <strong>文字コードの違いで見た目が同じでも別の文字になっていないか</strong><br />
+          例：「デ」が「テ+結合濁点」になっているケースなど。アップロード時はファイル名の濁点や拗音などに注意してください。
+        </li>
+        <li>
+          <strong>大文字と小文字を区別するサービスの場合に注意</strong><br />
+          例：拡張子 <code>.DOCX</code> と <code>.docx</code> の扱いが異なる場合があります。大文字小文字は正しく揃えましょう。
+        </li>
+        <li>
+          <strong>ファイル名が長すぎたり、区切りが不明瞭になっていないか</strong><br />
+          必要な情報を簡潔にまとめつつ、環境によっては長すぎるファイル名を扱いきれないこともあるため注意してください。
+        </li>
+      </ul>
+    </section>
+    <!-- 注意喚起のセクションここまで -->
   </main>
 
   <footer>
