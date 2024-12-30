@@ -1,56 +1,37 @@
-// ----------------------------
-// 1) URL から ext パラメータを取得
-//    例：?ext=docx -> 'docx'
+// URL パラメータから拡張子を取得し、デフォルトはdocxなど
 const urlParams = new URLSearchParams(window.location.search);
 let ext = urlParams.get("ext");
-
-// 2) ext が取得できない場合はデフォルト拡張子を設定
 if (!ext) {
-  ext = "pdf"; // デフォルトは pdf、必要に応じて変更可
+  ext = "docx";
 }
 
-// 3) input[type="file"] の accept 属性を動的に設定
+// ファイル入力に対して accept 属性を反映
 const fileInput = document.getElementById("fileInput");
 fileInput.setAttribute("accept", `.${ext}`);
 
-// ----------------------------
-// 4) 正規表現を拡張子に応じて動的に生成
-//    例: データ処理1101_第5回演習1_243360003山田太郎.docx
-//      ^データ処理       -> "データ処理" の文字列
-//      \d+               -> 1桁以上の数字 (例: 1101)
-//      _第               -> "_第"
-//      \d+               -> 1桁以上の数字 (例: 5)
-//      回演習            -> "回演習"
-//      \d+               -> 1桁以上の数字 (例: 1)
-//      _                 -> "_"
-//      [0-9]{9}          -> 9桁の数字 (例: 243360003)
-//      [ぁ-んァ-ヶ一-龠a-zA-Z]+ -> 氏名（日本語/英字）
-//      \.ext             -> 変数 ext に基づく拡張子
+// ★修正したパターン
+// 先頭：任意の日本語(ひらがな/カタカナ/漢字)・英数字
+// その後 _第○回演習○_
+// その後 9桁学籍番号 + [ぁ-んァ-ヶ一-龠a-zA-Z]+（氏名） + .ext
+// 例：情報科学入門1122_第2回演習2_243360003鈴木一郎.docx
 const fileNamePattern = new RegExp(
-  '^データ処理\\d+_第\\d+回演習\\d+_[0-9]{9}[ぁ-んァ-ヶ一-龠a-zA-Z]+\\.' + ext + '$'
+  '^[ぁ-んァ-ヶ一-龠a-zA-Z0-9_-]+_第\\d+回演習\\d+_[0-9]{9}[ぁ-んァ-ヶ一-龠a-zA-Z]+\\.' + ext + '$'
 );
 
-// ----------------------------
-// ファイル選択時に現在のファイル名を表示 (Unicode正規化)
+// ファイル選択時に現在のファイル名を表示
 fileInput.addEventListener("change", () => {
   const uploadedFileNameDiv = document.getElementById("uploadedFileName");
-
   if (fileInput.files && fileInput.files.length > 0) {
     let rawName = fileInput.files[0].name;
-    // ① 選択されたファイル名をNFCで正規化
-    rawName = rawName.normalize("NFC");
-
+    rawName = rawName.normalize("NFC"); // Unicode正規化
     uploadedFileNameDiv.textContent = `現在のファイル名: ${rawName}`;
   } else {
     uploadedFileNameDiv.textContent = "ファイルが選択されていません。";
   }
 });
 
-// ----------------------------
-// 「ファイル名をチェック」クリック時の処理 (Unicode正規化してマッチ判定)
 document.getElementById("checkBtn").addEventListener("click", () => {
   const resultDiv = document.getElementById("result");
-  // 初期化
   resultDiv.textContent = "";
   resultDiv.style.background = "";
 
@@ -60,19 +41,20 @@ document.getElementById("checkBtn").addEventListener("click", () => {
     return;
   }
 
-  // ② チェック時にも正規化
   let fileName = fileInput.files[0].name;
-  fileName = fileName.normalize("NFC");
+  fileName = fileName.normalize("NFC"); // Unicode正規化
 
-  // パターンに合致するか判定
   if (fileNamePattern.test(fileName)) {
-    // 適切なファイル名
+    // 適切
     resultDiv.textContent = `「${fileName}」は適切なファイル名です (拡張子: ${ext}).`;
-    resultDiv.style.background = "#c8e6c9"; // 緑
+    resultDiv.style.background = "#c8e6c9";
   } else {
-    // 不適切なファイル名
+    // 不適切
     resultDiv.innerHTML = `
-      「${fileName}」は指定された形式ではありません。`;
-    resultDiv.style.background = "#ffcdd2"; // 赤
+      「${fileName}」は指定された形式ではありません。<br />
+      <strong>正しい例:</strong><br />
+      情報科学入門1122_第2回演習2_123456789鈴木一郎.${ext}
+    `;
+    resultDiv.style.background = "#ffcdd2";
   }
 });
