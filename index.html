@@ -18,6 +18,11 @@
         （例：<strong>情報科学入門1122_第2回演習2_123456789鈴木一郎.docx</strong> など）
       </p>
 
+      <!-- 現在の拡張子を表示する領域を追加 -->
+      <div id="currentExtDisplay" class="current-ext-display">
+        <!-- JSで「現在の拡張子: ...」を表示 -->
+      </div>
+
       <div class="upload-area">
         <label for="fileInput" class="file-label">ファイルを選択</label>
         <input type="file" id="fileInput" />
@@ -48,11 +53,10 @@
       </div>
 
       <button id="checkBtn" class="check-btn">ファイル名をチェック</button>
-
       <div id="result" class="result"></div>
     </section>
 
-    <!-- ここから注意喚起のセクションを復元 -->
+    <!-- 注意喚起のセクションを復元 -->
     <section>
       <h2>ファイル名で間違えやすい点 (注意事項)</h2>
       <ul>
@@ -90,7 +94,6 @@
         </li>
       </ul>
     </section>
-    <!-- 注意喚起のセクションここまで -->
   </main>
 
   <footer>

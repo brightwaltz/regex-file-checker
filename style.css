@@ -24,7 +24,7 @@ header h1 {
   margin-bottom: 10px;
 }
 
-/* メインコンテンツ */
+/* メイン */
 main {
   max-width: 600px;
   margin: 0 auto;
@@ -51,17 +51,40 @@ main {
   display: none; /* ラベルでコントロールするため非表示 */
 }
 
-/* アップロードしたファイル名の表示 */
+/* 現在の拡張子表示 */
+.current-ext-display {
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 1.0rem;
+  color: #333;
+  background: #e0f7fa; /* 薄い水色背景 */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* アップロードしたファイル名 */
 .uploaded-file-name {
   margin: 10px 0;
   font-weight: bold;
-  color: #333;
+}
+
+/* 正規表現入力欄 */
+.regex-input-area {
+  margin: 15px 0;
+}
+
+.add-regex-btn {
+  margin-left: 5px;
+}
+
+/* プリセットの正規表現 */
+.regex-select-area {
+  margin-bottom: 15px;
 }
 
 /* チェックボタン */
 .check-btn {
   display: inline-block;
-  margin-top: 10px;
   padding: 10px 15px;
   background: #2196f3;
   color: #fff;
@@ -71,7 +94,7 @@ main {
   font-size: 1rem;
 }
 
-/* チェック結果表示 */
+/* 結果表示 */
 .result {
   margin-top: 20px;
   padding: 15px;
@@ -83,8 +106,4 @@ footer {
   text-align: center;
   margin-top: 30px;
   color: #666;
-}
-
-.footer-text {
-  font-size: 0.9rem;
 }
